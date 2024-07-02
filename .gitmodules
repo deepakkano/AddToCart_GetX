@@ -1,0 +1,3 @@
+[submodule "Getx_AddToCar"]
+	path = Getx_AddToCar
+	url = https://github.com/deepakkano/Getx_AddToCart.git
