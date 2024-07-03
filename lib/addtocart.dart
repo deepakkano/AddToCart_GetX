@@ -1,21 +1,31 @@
+import 'package:add_to_cart/product.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class AddtoCart extends StatefulWidget {
-  const AddtoCart({super.key});
+class AddToCart extends StatelessWidget {
+  final Controlerfruit controller = Get.find<Controlerfruit>();
 
-  @override
-  State<AddtoCart> createState() => _AddtoCartState();
-}
-
-class _AddtoCartState extends State<AddtoCart> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-       
+        title: Text('Cart'),
       ),
-      body: Container(child: Text("hllow rodn"),),
+      body: Obx(() => ListView.builder(
+        itemCount: controller.cart.length,
+        itemBuilder: (context, index) {
+          final item = controller.cart[index];
+          return ListTile(
+            leading: Image.asset(item['image'], width: 50, height: 50),
+            title: Text(item['name']),
+            subtitle: Text("Rs ${item['price']}/kg"),
+             trailing: ElevatedButton(
+                          onPressed: () => controller.removeToCart(index),
+                          child: Text("Remove"),
+                        ),
+          );
+        },
+      )),
     );
   }
 }
